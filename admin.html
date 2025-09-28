@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHOOLWALA Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c4712e; /* Warm Brown */
+            --accent: #ff9800;  /* Marigold Orange */
+            --light-bg: #fffbf5;
+            --table-header: #f7f5f0;
+            --table-even: #fdfaf2;
+            --text-color: #4a4a4a;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 30px;
+            background: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate; /* Use separate to enable border-radius */
+            border-spacing: 0;
+        }
+
+        thead {
+            position: sticky; /* Make header sticky */
+            top: 0;
+            z-index: 10;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        th {
+            background-color: var(--table-header);
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        thead tr:first-child th:first-child {
+            border-top-left-radius: 10px;
+        }
+
+        thead tr:first-child th:last-child {
+            border-top-right-radius: 10px;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: var(--table-even);
+        }
+
+        tbody tr:hover {
+            background-color: #fcefdc;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .no-orders {
+            text-align: center;
+            font-style: italic;
+            color: #72543d;
+            padding: 20px;
+            background-color: #fff9ed;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <div class="table-container">
+            <table id="ordersTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Quantity (KG)</th>
+                        <th>Date</th>
+                        <th>Slot</th>
+                        <th>Comments</th>
+                        <th>Ordered At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="no-orders">
+                        <td colspan="9">Loading orders...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+    async function loadOrders() {
+        const tbody = document.querySelector('#ordersTable tbody');
+        try {
+            // Fetch from the server (server.js should query order1)
+            const res = await fetch('http://localhost:3000/admin/orders');
+            if (!res.ok) {
+                throw new Error(`Server error: ${res.status}`);
+            }
+            const orders = await res.json();
+            tbody.innerHTML = '';
+
+            if (orders.length === 0) {
+                tbody.innerHTML = '<tr class="no-orders"><td colspan="9">No orders have been placed yet.</td></tr>';
+                return;
+            }
+
+            orders.forEach(o => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${o.id}</td>
+                    <td>${o.name}</td>
+                    <td>${o.phone}</td>
+                    <td>${o.address}</td>
+                    <td>${o.quantity}</td>
+                    <td>${o.date}</td>
+                    <td>${o.slot}</td>
+                    <td>${o.comments || ''}</td>
+                    <td>${new Date(o.created_at).toLocaleString()}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        } catch (err) {
+            console.error("Error loading orders:", err);
+            tbody.innerHTML = '<tr class="no-orders"><td colspan="9">❌ An error occurred while loading orders. Please check the server.</td></tr>';
+        }
+    }
+
+    // Initial load
+    loadOrders();
+
+    // Refresh every 5 seconds
+    setInterval(loadOrders, 5000);
+</script>
+
+</body>
+</html>

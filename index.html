@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PHOOLWALA - Dussehra Special</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Poppins:wght@400;600;700&display=swap');
+
+    /* CSS Variables for a cohesive theme */
+    :root {
+      --primary-gold: #ffc107;
+      --secondary-orange: #ff9800;
+      --accent-red: #d32f2f;
+      --text-brown: #5d4037;
+      --bg-light-yellow: #fff8e1;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(180deg, #fffde8 0%, #fff4e6 100%);
+      color: var(--text-brown);
+      /* Use a base font size that can be scaled later */
+      font-size: 16px; 
+    }
+
+    /* Header - Uses Flexbox for a responsive layout */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      flex-wrap: wrap; /* Allows items to wrap to a new line on smaller screens */
+      text-align: center; /* Center align all text content */
+    }
+
+    .ram-ravana-img img {
+      width: 100px;
+      height: auto;
+    }
+
+    .logo {
+      text-align: center;
+      flex: 1; /* Allows the logo to grow */
+    }
+
+    .logo img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid var(--secondary-orange);
+      background: var(--bg-light-yellow);
+      box-shadow: 0 0 20px var(--primary-gold);
+      animation: logoPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes logoPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .title-slogan {
+      text-align: center;
+      flex: 2; /* Gives the title more space */
+    }
+
+    .title {
+      font-family: 'Merriweather', serif;
+      font-size: 2.5em; /* Use em for scalable font size */
+      font-weight: 900;
+      color: var(--accent-red);
+      text-shadow: 2px 2px 5px var(--primary-gold);
+      margin: 0;
+    }
+
+    .slogan {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: var(--text-brown);
+      margin-top: -5px;
+    }
+
+    .offer-banner {
+      background: linear-gradient(45deg, var(--primary-gold), var(--secondary-orange));
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: 700;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    .offer-price {
+      font-size: 1em;
+      font-weight: 600;
+      margin-top: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 15px;
+    }
+
+    /* Carousel */
+    .carousel-container {
+      position: relative;
+      width: 90%; /* Use percentage for fluid width */
+      max-width: 800px;
+      margin: 25px auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px var(--shadow);
+    }
+
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-img {
+      width: 100%;
+      min-width: 100%;
+      height: 400px; /* Fixed height for consistent look */
+      object-fit: cover;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.7);
+      border: none;
+      color: var(--text-brown);
+      font-size: 2em;
+      padding: 5px 15px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+    
+    .carousel-nav:hover {
+        background: rgba(255,255,255,0.9);
+    }
+
+    .carousel-prev { left: 10px; }
+    .carousel-next { right: 10px; }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .dot.active {
+      background: var(--primary-gold);
+      border: 2px solid var(--text-brown);
+    }
+
+    /* Booking Form - Responsive with max-width and percentage */
+    .booking-section {
+      background: var(--bg-light-yellow);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px var(--shadow);
+      width: 90%;
+      max-width: 800px;
+      margin: 0 auto 50px;
+    }
+
+    .section-title {
+      font-family: 'Merriweather', serif;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: var(--accent-red);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* Two columns for desktop */
+      gap: 20px;
+    }
+
+    .form-grid .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid var(--secondary-orange);
+      font-size: 1em;
+      box-sizing: border-box; /* Ensures padding doesn't affect total width */
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      background: var(--accent-red);
+      color: #fff;
+      font-size: 1.2em;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #e91e63;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      font-size: 0.9em;
+      color: #795548;
+    }
+
+    /* ===================================== */
+    /* Mobile Responsiveness (using Media Query) */
+    /* ===================================== */
+    @media (max-width: 768px) {
+      /* Header: Stack elements vertically for better mobile view */
+      header { 
+        flex-direction: column; 
+        align-items: center; 
+      }
+      .ram-ravana-img { 
+        margin-bottom: 10px; 
+      }
+      .logo {
+        margin-top: 10px;
+      }
+      .logo img {
+        width: 100px;
+        height: 100px;
+      }
+      .title {
+        font-size: 2em;
+      }
+      .slogan {
+        font-size: 1em;
+      }
+      
+      /* Carousel: Adjust image height for mobile */
+      .carousel-img {
+        height: 250px;
+      }
+      
+      /* Form: Switch to a single-column layout */
+      .form-grid { 
+        grid-template-columns: 1fr; 
+      }
+      
+      /* Re-apply full-width class to ensure it doesn't break the single-column layout */
+      .form-grid .full-width {
+          grid-column: auto;
+      }
+    }
+    
+    @media (max-width: 480px) {
+        /* Even smaller phones */
+        .title {
+            font-size: 1.5em;
+        }
+        .offer-banner {
+            font-size: 1em;
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="ram-ravana-img">
+      <img src="illustration-lord-rama-killing-to-ravana-demon-showing-performance-occasion-happy-dussehra-illustration-lord-rama-159434079.webp" alt="Ram Killing Ravana">
+    </div>
+    <div class="logo">
+      <img src="Screenshot 2025-09-28 012204.png" alt="PHOOLWALA Logo">
+    </div>
+    <div class="title-slogan">
+      <h1 class="title">PHOOLWALA</h1>
+      <p class="slogan">Khet se Apa Tak</p>
+    </div>
+    <div class="offer-banner">
+      Special Dussehra Offer
+      <div class="offer-price">Marigold flowers at ₹150 per KG</div>
+    </div>
+  </header>
+
+  <div class="carousel-container">
+    <div class="carousel-inner" id="carouselInner">
+      <img class="carousel-img" src="Best-Marigold-Varieties-Feature.jpg" alt="Field of marigold flowers">
+      <img class="carousel-img" src="giant-african-marigolds-in-a-large-flowerbed-C6HHFX.jpg" alt="Marigold garland">
+      <img class="carousel-img" src="8efca23f-556c-4403-bef8-de85ce8f8b10_1.ce46189dbe9a5ec32703012e612abaea.webp" alt="Marigold basket with diya">
+    </div>
+    <button class="carousel-nav carousel-prev" id="carouselPrev">&#10094;</button>
+    <button class="carousel-nav carousel-next" id="carouselNext">&#10095;</button>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+
+  <section class="booking-section">
+    <h2 class="section-title">Book Your Dussehra Flowers</h2>
+    <h5 class="section-title">No pre-booking charges and cash on delivery</h5>
+    <form id="orderForm">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="custName">Name</label>
+          <input type="text" id="custName" required />
+        </div>
+        <div class="form-group">
+          <label for="custPhone">Mobile Number</label>
+          <input type="tel" id="custPhone" pattern="[0-9]{10}" maxlength="10" required />
+        </div>
+        <div class="form-group full-width">
+          <label for="custAddr">Address</label>
+          <input type="text" id="custAddr" required />
+        </div>
+        <div class="form-group">
+          <label for="qty">Quantity (KG)</label>
+          <select id="qty" required onchange="updatePrice()">
+            <option value="" disabled selected>Select Quantity</option>
+            <option value="1">1 KG</option>
+            <option value="2">2 KG</option>
+            <option value="3">3 KG</option>
+            <option value="4">4 KG</option>
+            <option value="5">5 KG</option>
+            <option value="10">10 KG</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="priceDisplay">Total Price</label>
+          <input type="text" id="priceDisplay" readonly value="₹0" />
+        </div>
+        <div class="form-group">
+          <label for="date">Delivery Date</label>
+          <input type="date" id="date" required />
+        </div>
+        <div class="form-group">
+          <label for="slot">Delivery Slot</label>
+          <select id="slot" required>
+            <option value="" disabled selected>Select Time Slot</option>
+            <option>8 AM - 12 PM</option>
+            <option>12 PM - 4 PM</option>
+            <option>4 PM - 8 PM</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label for="comments">Additional Comments</label>
+          <textarea id="comments" rows="3" placeholder="Any special notes or requests..."></textarea>
+        </div>
+      </div>
+      <div> 
+        Note : You can order Phool mala for Bike and Door(f required contact us)
+      </div>
+      <button type="submit" class="submit-btn">Book Now</button>
+    </form>
+  </section>
+
+  <footer>
+    Contact : 9112182787 and 9960376046
+    &copy; 2025 PHOOLWALA. All rights reserved.
+  </footer>
+
+  <script>
+    // Carousel functionality
+    const carouselInner = document.getElementById('carouselInner');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    const dotsContainer = document.getElementById('carouselDots');
+    const images = carouselInner.querySelectorAll('img');
+    let currentIndex = 0;
+    let intervalId;
+
+    images.forEach((_, index) => {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if(index===0) dot.classList.add('active');
+      dot.addEventListener('click', () => showSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+    const dots = dotsContainer.querySelectorAll('.dot');
+
+    function showSlide(index){
+      if(index>=images.length) currentIndex=0;
+      else if(index<0) currentIndex=images.length-1;
+      else currentIndex=index;
+      carouselInner.style.transform = `translateX(-${currentIndex*100}%)`;
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[currentIndex].classList.add('active');
+    }
+
+    function nextSlide(){ showSlide(currentIndex+1); }
+    function prevSlide(){ showSlide(currentIndex-1); }
+
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    function startCarousel(){ intervalId=setInterval(nextSlide, 4000); }
+    function stopCarousel(){ clearInterval(intervalId); }
+
+    carouselInner.addEventListener('mouseenter', stopCarousel);
+    carouselInner.addEventListener('mouseleave', startCarousel);
+    nextBtn.addEventListener('click', () => { stopCarousel(); startCarousel(); });
+    prevBtn.addEventListener('click', () => { stopCarousel(); startCarousel(); });
+
+    startCarousel();
+
+    // Price calculation
+    function updatePrice(){
+      const qty = document.getElementById("qty").value;
+      const priceDisplay = document.getElementById("priceDisplay");
+      priceDisplay.value = qty ? `₹${qty*150}` : "₹0";
+    }
+
+    // Form submission
+    document.getElementById("orderForm").addEventListener("submit", async function(event){
+      event.preventDefault();
+      const data = {
+        name: document.getElementById("custName").value,
+        phone: document.getElementById("custPhone").value,
+        address: document.getElementById("custAddr").value,
+        quantity: document.getElementById("qty").value,
+        date: document.getElementById("date").value,
+        slot: document.getElementById("slot").value,
+        comments: document.getElementById("comments").value
+      };
+
+      try {
+        const res = await fetch('http://localhost:3000/submit-order', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        if(result.status==='success'){
+          alert("Order placed successfully! 🎉");
+          this.reset();
+          document.getElementById("priceDisplay").value="₹0";
+        } else {
+          alert("Error placing order. Try again.");
+        }
+      } catch(err){
+        alert("Server error. Try again later.");
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
